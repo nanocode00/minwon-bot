@@ -1,0 +1,19 @@
+# 로컬 환경변수와 비밀키
+.env
+.env.*
+!.env.example
+
+# Python 실행 캐시·로컬 산출물
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# AI Hub 원본 데이터는 재배포하지 않음
+data/23.민간 민원 상담 LLM 사전학습 및 Instruction Tuning 데이터/
+data/raw/
+data/Training/
+data/Validation/
+
+# AI Hub 파생 데이터·모델은 공개 저장소에 재배포하지 않음
+data/faqs.csv
+ml/category_classifier.joblib
