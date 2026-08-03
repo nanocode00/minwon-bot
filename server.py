@@ -26,7 +26,9 @@ MAX_RESULTS = 5
 AMBIGUITY_MARGIN = 0.25
 LLM_TIMEOUT_SECONDS = 20
 HANDOFF_MESSAGE = "관련 FAQ에서 확인할 수 없는 내용입니다. 담당자 연결(1588-0000)을 이용해 주세요."
-SENSITIVE_TOPICS = re.compile(r"(금액|결제일|한도|환급금)")
+SENSITIVE_TOPICS = re.compile(
+    r"(금액|결제일|한도|환급금|\d[\d,]*(?:\.\d+)?\s*(?:원|천원|만원|억원))"
+)
 UNSUPPORTED_GENERALIZATIONS = re.compile(
     r"(보험사마다|회사마다|업체마다|일반적으로|통상적으로|대체로|보통은)"
 )
