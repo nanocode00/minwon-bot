@@ -14,7 +14,10 @@ from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-import joblib
+try:
+    import joblib
+except ImportError:
+    joblib = None
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent
@@ -86,7 +89,7 @@ class SearchService:
                 ".env에 SUPABASE_URL과 SUPABASE_PUBLISHABLE_KEY가 필요합니다."
             )
         self.model = None
-        if MODEL_PATH.exists():
+        if joblib is not None and MODEL_PATH.exists():
             artifact = joblib.load(MODEL_PATH)
             self.model = artifact["model"]
 

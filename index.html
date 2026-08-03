@@ -816,8 +816,21 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ question: question.value.trim() })
         }).then(function (response) {
-          return response.json().then(function (data) {
-            if (!response.ok) throw new Error(data.error || "검색 요청에 실패했습니다.");
+          return response.text().then(function (body) {
+            var data;
+            try {
+              data = body ? JSON.parse(body) : {};
+            } catch (_error) {
+              data = {};
+            }
+            if (!response.ok) {
+              throw new Error(
+                data.error || "검색 서비스에 연결하지 못했습니다. 잠시 후 다시 시도해 주세요."
+              );
+            }
+            if (!data || typeof data !== "object") {
+              throw new Error("검색 응답을 확인하지 못했습니다. 잠시 후 다시 시도해 주세요.");
+            }
             return data;
           });
         }).then(function (data) {
